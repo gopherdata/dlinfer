@@ -5,6 +5,10 @@ package dlinfer
 
 import "os"
 
+// #cgo CXXFLAGS: -std=c++11 -I/usr/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/samples/format_reader
+// #cgo LDFLAGS: -L/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/bin/intel64/lib -L/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/lib/intel64 -ldl -linference_engine -lformat_reader
+import "C"
+
 // Configurator inncludes the necessary pieces of an
 // Inferenence Engine Configurator, as used in the Intel
 // Deep Learning iSDK.
