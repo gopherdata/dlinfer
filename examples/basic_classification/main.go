@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/gopherds/dlinfer"
-)
+import "github.com/gopherds/dlinfer"
 
 const (
 	model      = "/CaffeNet.xml"
@@ -33,6 +29,5 @@ func main() {
 	configurator.Infer()
 
 	// Get the top results for our image.
-	results := configurator.GetTopResult(5)
-	fmt.Println(results)
+	configurator.GetTopResult(5)
 }
