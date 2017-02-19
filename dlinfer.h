@@ -136,6 +136,8 @@ public:
     void infer();
 
     std::vector<InferenceResults> getTopResult(unsigned int topCount);
+    
+    void printTopResults(std::vector<LabelProbability>);
 
     /**
      * Function prints perfomance counts
