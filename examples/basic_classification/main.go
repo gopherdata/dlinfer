@@ -21,7 +21,7 @@ func main() {
 	if len(args) != 2 {
 		log.Fatal("Please provide an image as input")
 	}
-	imageFile = args[1]
+	imageFile := args[1]
 
 	// Create an inference configurator value.
 	pluginPaths := dlinfer.NewStringVector()
