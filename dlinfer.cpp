@@ -229,21 +229,6 @@ void InferenceEngineConfigurator::infer() {
     wasInfered = true;
 }
 
-void InferenceEngineConfigurator::printTopResults(std::vector<InferenceResults> results) {
-    if (results.size()) {
-        std::cout << std::endl << "Top " << ntop << " results:" << std::endl << std::endl;
-        for (size_t i = 0; i < results.size(); i++) {
-            std::cout << "Image " << results.at(i).getName() << std::endl << std::endl;
-            const std::vector<LabelProbability> imageResults = results.at(i).getResults();
-            for (size_t j = 0; j < imageResults.size(); j++) {
-                std::cout << imageResults.at(j).getLabelIndex() << " " << imageResults.at(j).getProbability() << " "
-                          << imageResults.at(j).getLabel() << std::endl;
-            }
-            std::cout << std::endl;
-        }
-    }
-}
-
 std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned int topCount) {
     if (!wasInfered) {
         THROW_IE_EXCEPTION << "Cannot get top results!";
@@ -272,6 +257,20 @@ std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned
         }
         outputResults.push_back(imageResult);
     }
+
+    if (outputResults.size()) {
+        std::cout << std::endl << "Top " << ntop << " results:" << std::endl << std::endl;
+        for (size_t i = 0; i < outputResults.size(); i++) {
+            std::cout << "Image " << outputResults.at(i).getName() << std::endl << std::endl;
+            const std::vector<LabelProbability> imageResults = outputResults.at(i).getResults();
+            for (size_t j = 0; j < imageResults.size(); j++) {
+                std::cout << imageResults.at(j).getLabelIndex() << " " << imageResults.at(j).getProbability() << " "
+                          << imageResults.at(j).getLabel() << std::endl;
+            }
+            std::cout << std::endl;
+        }
+    }
+
     return outputResults;
 }
 

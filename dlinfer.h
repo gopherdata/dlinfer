@@ -137,8 +137,6 @@ public:
 
     std::vector<InferenceResults> getTopResult(unsigned int topCount);
     
-    void printTopResults(std::vector<LabelResults>);
-
     /**
      * Function prints perfomance counts
      * @param stream - output stream
