@@ -229,6 +229,37 @@ void InferenceEngineConfigurator::infer() {
     wasInfered = true;
 }
 
+std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned int topCount) {
+    if (!wasInfered) {
+        THROW_IE_EXCEPTION << "Cannot get top results!";
+    }
+    std::vector<unsigned> results;
+    // Get top N results
+    InferenceEngine::TopResults(topCount, *_output, results);
+
+    // Save top N results to vector with InferenceEngineConfigurator::InferenceResults objects
+    std::vector<InferenceResults> outputResults;
+    size_t batchSize = _output->dims()[1];
+
+    topCount = std::min<unsigned int>(_output->dims()[0], topCount);
+
+    if (batchSize != imageNames.size()) {
+        THROW_IE_EXCEPTION << "Batch size is not equal to the number of images!";
+    }
+    for (size_t i = 0; i < batchSize; i++) {
+        InferenceResults imageResult(imageNames.at(i));
+        for (size_t j = 0; j < topCount; j++) {
+            unsigned result = results[i * topCount + j];
+            std::string label =
+                    result < _classes.size() ? _classes[result] : stringFormat("label #%d", result);
+            imageResult.addResult(
+                    {static_cast<int>(result), _output->data()[result + i * (_output->size() / batchSize)], label});
+        }
+        outputResults.push_back(imageResult);
+    }
+    return outputResults;
+}
+
 void InferenceEngineConfigurator::printGetPerformanceCounts(std::ostream &stream) {
     long long totalTime = 0;
     std::map<std::string, InferenceEngine::InferenceEngineProileInfo> perfomanceMap;

@@ -7,10 +7,10 @@ import (
 )
 
 const (
-	model      = "../../../../dwhitena/intel_sdk_test/alexnet/model/CaffeNet.xml"
+	model      = "/CaffeNet.xml"
 	pluginPath = "/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/lib/intel64/"
 	plugin     = "MKLDNNPlugin"
-	labelsFile = "../../../../dwhitena/intel_sdk_test/alexnet/model/CaffeNet.labels"
+	labelsFile = "/CaffeNet.labels"
 )
 
 func main() {
