@@ -259,7 +259,7 @@ std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned
     }
 
     if (outputResults.size()) {
-        std::cout << std::endl << "Top " << ntop << " results:" << std::endl << std::endl;
+        std::cout << std::endl << "Top " << topCount << " results:" << std::endl << std::endl;
         for (size_t i = 0; i < outputResults.size(); i++) {
             std::cout << "Image " << outputResults.at(i).getName() << std::endl << std::endl;
             const std::vector<LabelProbability> imageResults = outputResults.at(i).getResults();
