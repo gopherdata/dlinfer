@@ -26,4 +26,3 @@ _Note_: This is work in progress.
     ```
 
 - build/install your Go progams as you normally would with `go build` and `go install`.  See [here](examples/basic_classification/main.go) for an example.
-    ```
